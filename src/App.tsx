@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import FormInput from "./components/FormInput";
+import { useState } from "react";
+import "./App.css";
+
+const initialValue: string[] = ["Example 1", "Example 2"];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [formData, setFormData] = useState(initialValue);
+  
+  function handleFormData(data)
+  {
+    setFormData([...formData, data]);
+  }
 
+  function handleClick(index: number)
+  {
+    const updatedFormData = formData.filter((item, i) => i !== index);
+    setFormData(updatedFormData);
+  }
+  
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Todo</h1>
+      <FormInput sendFormData={handleFormData} />
+      <ul>
+        {formData.map((item, index) => (
+        <li key={index} onClick={() => handleClick(index)}>{item}</li>
+        ))}
+      </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
