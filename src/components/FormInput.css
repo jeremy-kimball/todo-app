@@ -1,0 +1,10 @@
+form {
+    text-align: center;
+    display: block;
+}
+.WriteTodo {
+    font-size: 30px;
+}
+.Submit {
+    display:none;
+}
